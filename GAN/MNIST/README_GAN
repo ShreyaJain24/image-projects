@@ -1,0 +1,59 @@
+Different GAN implementations tried:
+
+1. VanillaGAN_Tensorflow (MNIST)
+- Vanilla GAN PyTorch.ipynb
+- LeakyRelu, tanh, AdamOptimizer
+- Losses
+    Discriminator loss real = sigmoid_cross_entropy on real images from training data(target value =1)
+    Discriminator loss fake = sigmoid_cross_entropy om fake images from generator data(target value =0)
+    Generator loss = sigmoid_cross_entropy on fake images from generator data(target value =1 as generator wants them real)
+
+
+2. Pytorch DCGAN (MNIST)
+- DCGAN_Pytorch.ipynb
+- Convo (filter size = 4x4)
+- LeakyRelu, tanh, BatchNorm
+- Same losses
+
+
+3. Tensorflow DCGAN (MNIST)
+- DCGAN_Tensorflow.ipynb
+- Total parameters: 48,043,908
+- MNIST dataset images = training- 60,000, test-10k
+- No of batches =
+- AdamOptimizer,
+- time taken
+- check gpu compatibility  - sess = tf.Session(config=tf.ConfigProto(log_device_placement=True)) and check console output
+                            - define graph in with 'tf.device('/gpu:0'):' form
+
+- tensorboard- use the command:
+ tensorboard --logdir=/Users/shreyajain/PycharmProjects/GAN/gans/graphs,
+ logdir is where the event file is stored
+- To generate an event file, use SummaryWriter object to write 'graph.sess' -> diff ways of adding scalar, images, etc
+- type localhost:6006 to view tensorboard results
+-  plot loss function,  variable scope
+
+- tensorboard keras - need to pass val_data not generator for images to display with histogram_freq != 1
+
+ToDO:
+
+- generate new images
+- Evaluation metric for generative models, texts and images
+- github all along with training pics
+- cpu pipeline -> tf.record()
+
+
+- Vanishing gradients is a major problem in GANs.
+As the only way the generator has to learn is by receiving the gradients from the discriminator.
+Using ReLu and Batch Norm is the solution.
+
+
+- for tensorboardX:
+    pip install tensorboard==1.11.0
+    pip install tensorboardX==1.4
+    pip install tensorflow==1.11.0
+
+
+GAN theory:
+https://medium.com/ai-society/gans-from-scratch-1-a-deep-introduction-with-code-in-pytorch-and-tensorflow-cb03cdcdba0f
+
